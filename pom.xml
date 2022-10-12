@@ -2,16 +2,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.sankuai.inf.leaf</groupId>
-    <artifactId>leaf-parent</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0.1</version>
-    <name>Leaf</name>
+
+    <groupId>io.github.starimmortal</groupId>
+    <artifactId>leaf-spring-boot</artifactId>
+    <version>1.0.0-RELEASE</version>
+    <name>leaf-spring-boot</name>
+    <url>https://github.com/StarImmortal/leaf-spring-boot</url>
+    <description>Distributed ID Generate Service Based On Spring Boot Starter</description>
+
     <modules>
         <module>leaf-core</module>
         <module>leaf-server</module>
+        <module>leaf-spring-boot-autoconfigure</module>
+        <module>leaf-spring-boot-starter</module>
     </modules>
-    <description>Distributed ID Generate Service</description>
+
+    <packaging>pom</packaging>
+
     <developers>
         <developer>
             <id>zhangzhitong</id>
@@ -28,41 +35,76 @@
             <name>xiezhaodong</name>
             <email>pursuer_xie@foxmail.com</email>
         </developer>
+        <developer>
+            <id>william</id>
+            <name>william</name>
+            <email>william@starimmortal.com</email>
+            <organizationUrl>https://doc.starimmortal.com</organizationUrl>
+        </developer>
     </developers>
+
     <organization>
         <name>Meituan-Dianping Group</name>
         <url>https://github.com/Meituan-Dianping</url>
     </organization>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/StarImmortal/leaf-spring-boot</url>
+        <connection>https://github.com/StarImmortal/leaf-spring-boot.git</connection>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring.version>4.3.18.RELEASE</spring.version>
-        <junit.version>4.12</junit.version>
-        <maven.compiler.version>3.5.1</maven.compiler.version>
-        <mybatis.version>3.3.0</mybatis.version>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <spring-boot-dependencies.version>2.6.9</spring-boot-dependencies.version>
+        <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
+        <druid.version>1.2.8</druid.version>
         <perf4j.version>0.9.16</perf4j.version>
-        <curator.version>2.6.0</curator.version>
-        <slf4j.version>1.7.2</slf4j.version>
-        <druid.version>1.0.18</druid.version>
-        <jackson-databind.version>2.9.6</jackson-databind.version>
-        <mysql-connector-java.version>5.1.38</mysql-connector-java.version>
+        <curator.version>5.2.1</curator.version>
         <commons-io.version>2.4</commons-io.version>
-        <log4j.version>2.7</log4j.version>
-        <mybatis-spring.version>1.2.5</mybatis-spring.version>
+        <lombok.version>1.18.24</lombok.version>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.sankuai.inf.leaf</groupId>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.github.starimmortal</groupId>
                 <artifactId>leaf-core</artifactId>
-                <version>1.0.1</version>
+                <version>1.0.0-RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-            <!--zk-->
             <dependency>
                 <groupId>org.apache.curator</groupId>
                 <artifactId>curator-recipes</artifactId>
@@ -80,62 +122,9 @@
                 <version>${commons-io.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-                <version>${mybatis.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.perf4j</groupId>
                 <artifactId>perf4j</artifactId>
                 <version>${perf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-core</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-beans</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-jdbc</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-test</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-slf4j-impl</artifactId>
-                <version>${log4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-api</artifactId>
-                <version>${log4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-core</artifactId>
-                <version>${log4j.version}</version>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>
@@ -143,59 +132,67 @@
                 <version>${mysql-connector-java.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-spring</artifactId>
-                <version>${mybatis-spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <build>
-        <finalName>leaf</finalName>
+        <finalName>leaf-spring-boot</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.version}</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.5.201505241946</version>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
                 <executions>
                     <execution>
-                        <id>pre-unit-test</id>
+                        <id>attach-sources</id>
                         <goals>
-                            <goal>prepare-agent</goal>
+                            <goal>jar-no-fork</goal>
                         </goals>
-                        <configuration>
-                            <destFile>
-                                ${project.build.directory}/${project.artifactId}-jacoco.exec
-                            </destFile>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>post-unit-test</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <configuration>
-                            <dataFile>
-                                ${project.build.directory}/${project.artifactId}-jacoco.exec
-                            </dataFile>
-                            <outputDirectory>${project.build.directory}/jacoco</outputDirectory>
-                        </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <show>private</show>
+                    <nohelp>true</nohelp>
+                    <charset>UTF-8</charset>
+                    <encoding>UTF-8</encoding>
+                    <docencoding>UTF-8</docencoding>
+<!--                    <additionalparam>-Xdoclint:none</additionalparam>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
             </plugin>
         </plugins>
     </build>
